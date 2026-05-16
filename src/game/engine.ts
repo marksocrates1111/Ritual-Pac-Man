@@ -1,6 +1,9 @@
 import { TILE_SIZE, COLS, ROWS, MAZE, COLORS, DIR } from './constants';
 import { playWaka, playPowerPellet, playEatGhost, playDeath, playLevelClear, startSiren, stopSiren, setFrightenedSiren, playGameStart } from './audio';
 
+const ritualLogo = new Image();
+ritualLogo.src = '/bg.png';
+
 export type Direction = { x: number; y: number };
 export type GameState = 'waiting' | 'starting' | 'playing' | 'dying' | 'gameover' | 'won' | 'levelclear';
 
@@ -413,25 +416,32 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
       if (cell === 1) {
         drawWall(ctx, x, y, game.maze);
       } else if (cell === 2) {
-        ctx.fillStyle = COLORS.dot;
-        ctx.shadowBlur = 4;
-        ctx.shadowColor = COLORS.wallGlow;
+        // Gold Coin
+        ctx.fillStyle = '#ffd700';
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(255, 215, 0, 0.6)';
         ctx.beginPath();
-        ctx.arc(x * T + T / 2, y * T + T / 2, 2, 0, Math.PI * 2);
+        ctx.arc(x * T + T / 2, y * T + T / 2, 3, 0, Math.PI * 2);
         ctx.fill();
+        // Inner detail
+        ctx.strokeStyle = '#b8860b';
+        ctx.lineWidth = 1;
+        ctx.stroke();
         ctx.shadowBlur = 0;
       } else if (cell === 3) {
-        // Power pellet — pulsing
+        // Power pellet — pulsing Ritual Logo
         const pulse = 0.5 + 0.5 * Math.sin(game.frameCount * 0.1);
-        ctx.fillStyle = COLORS.powerPellet;
         ctx.globalAlpha = pulse;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = COLORS.wallGlow;
-        ctx.beginPath();
-        ctx.arc(x * T + T / 2, y * T + T / 2, 6, 0, Math.PI * 2);
-        ctx.fill();
+        const size = 16;
+        if (ritualLogo.complete) {
+          ctx.drawImage(ritualLogo, x * T + (T - size) / 2, y * T + (T - size) / 2, size, size);
+        } else {
+          ctx.fillStyle = COLORS.powerPellet;
+          ctx.beginPath();
+          ctx.arc(x * T + T / 2, y * T + T / 2, 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
         ctx.globalAlpha = 1;
-        ctx.shadowBlur = 0;
       } else if (cell === 5) {
         ctx.strokeStyle = COLORS.gate;
         ctx.lineWidth = 2;
