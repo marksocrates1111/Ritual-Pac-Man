@@ -418,8 +418,6 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
       } else if (cell === 2) {
         // Gold Coin
         ctx.fillStyle = '#ffd700';
-        ctx.shadowBlur = 6;
-        ctx.shadowColor = 'rgba(255, 215, 0, 0.6)';
         ctx.beginPath();
         ctx.arc(x * T + T / 2, y * T + T / 2, 3, 0, Math.PI * 2);
         ctx.fill();
@@ -427,7 +425,6 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
         ctx.strokeStyle = '#b8860b';
         ctx.lineWidth = 1;
         ctx.stroke();
-        ctx.shadowBlur = 0;
       } else if (cell === 3) {
         // Power pellet — pulsing Ritual Logo
         const pulse = 0.5 + 0.5 * Math.sin(game.frameCount * 0.1);
@@ -491,8 +488,6 @@ function drawWall(ctx: CanvasRenderingContext2D, x: number, y: number, maze: num
 
   ctx.strokeStyle = COLORS.wall;
   ctx.lineWidth = 1.5;
-  ctx.shadowBlur = 3;
-  ctx.shadowColor = COLORS.wallGlow;
 
   const isW = (cx: number, cy: number) => {
     if (cx < 0 || cx >= COLS || cy < 0 || cy >= ROWS) return true;
@@ -505,7 +500,6 @@ function drawWall(ctx: CanvasRenderingContext2D, x: number, y: number, maze: num
   if (!isW(x - 1, y)) { ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, py + T); ctx.stroke(); }
   if (!isW(x + 1, y)) { ctx.beginPath(); ctx.moveTo(px + T, py); ctx.lineTo(px + T, py + T); ctx.stroke(); }
 
-  ctx.shadowBlur = 0;
 }
 
 function drawPacman(ctx: CanvasRenderingContext2D, pac: PacmanState, frame: number): void {
