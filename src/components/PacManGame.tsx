@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { CANVAS_W, CANVAS_H } from '../game/constants';
-import { createGame, updateGame, renderGame, handleKeyDown, type GameState, drawOverlay } from '../game/engine';
+import { createGame, updateGame, renderGame, handleKeyDown, type GameState } from '../game/engine';
 
 interface PacManGameProps {
   onScoreChange?: (score: number) => void;
@@ -16,6 +16,7 @@ export function PacManGame({ onScoreChange, onGameOver, onStateChange }: PacManG
   const [lives, setLives] = useState(3);
   const [gameState, setGameState] = useState<GameState>('waiting');
   const [level, setLevel] = useState(1);
+  const [activeKey, setActiveKey] = useState<string | null>(null);
 
   const resetGame = useCallback(() => {
     gameRef.current = createGame();
