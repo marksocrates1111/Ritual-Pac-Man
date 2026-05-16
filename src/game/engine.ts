@@ -433,7 +433,7 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
         const pulse = 0.5 + 0.5 * Math.sin(game.frameCount * 0.1);
         ctx.globalAlpha = pulse;
         const size = 12; // Made smaller as requested
-        if (ritualLogo.complete) {
+        if (ritualLogo.complete && ritualLogo.naturalWidth > 0) {
           ctx.drawImage(ritualLogo, x * T + (T - size) / 2, y * T + (T - size) / 2, size, size);
         } else {
           ctx.fillStyle = COLORS.powerPellet;
