@@ -427,9 +427,9 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
         ctx.stroke();
       } else if (cell === 3) {
         // Power pellet — pulsing Ritual Logo
-        const pulse = 0.5 + 0.5 * Math.sin(game.frameCount * 0.1);
+        const pulse = 0.8 + 0.2 * Math.sin(game.frameCount * 0.1);
         ctx.globalAlpha = pulse;
-        const size = 12; // Made smaller as requested
+        const size = 20; // Increased size to fill the tile
         if (ritualLogo.complete && ritualLogo.naturalWidth > 0) {
           ctx.shadowColor = '#39ff14';
           ctx.shadowBlur = 15;
