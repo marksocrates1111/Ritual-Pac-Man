@@ -2,7 +2,7 @@ import { TILE_SIZE, COLS, ROWS, MAZE, COLORS, DIR } from './constants';
 import { playWaka, playPowerPellet, playEatGhost, playDeath, playLevelClear, startSiren, stopSiren, setFrightenedSiren, playGameStart } from './audio';
 
 const ritualLogo = new Image();
-ritualLogo.src = '/bg.png';
+ritualLogo.src = '/ritgreen-logo.png';
 
 export type Direction = { x: number; y: number };
 export type GameState = 'waiting' | 'starting' | 'playing' | 'dying' | 'gameover' | 'won' | 'levelclear';
@@ -432,7 +432,7 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
         // Power pellet — pulsing Ritual Logo
         const pulse = 0.5 + 0.5 * Math.sin(game.frameCount * 0.1);
         ctx.globalAlpha = pulse;
-        const size = 16;
+        const size = 12; // Made smaller as requested
         if (ritualLogo.complete) {
           ctx.drawImage(ritualLogo, x * T + (T - size) / 2, y * T + (T - size) / 2, size, size);
         } else {
