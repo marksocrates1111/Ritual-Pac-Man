@@ -1,0 +1,385 @@
+/* ══════════════════════════════════════════════════════════════
+   RITUAL PAC-MAN — Design System
+   Dark Neon Green Cyberpunk Theme (Ritcord-inspired)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Core palette */
+  --ritual-black: #0a0a0f;
+  --ritual-dark: #0d0d14;
+  --ritual-surface: #111118;
+  --ritual-card: #14141e;
+  --ritual-border: #1e1e2e;
+  
+  /* Neon greens */
+  --neon-green: #39ff14;
+  --neon-green-dim: #2bcc10;
+  --neon-green-glow: rgba(57, 255, 20, 0.3);
+  --neon-green-subtle: rgba(57, 255, 20, 0.08);
+  
+  /* Pac-Man colors (neon variants) */
+  --pacman-yellow: #ffe100;
+  --pacman-yellow-glow: rgba(255, 225, 0, 0.4);
+  --ghost-red: #ff3333;
+  --ghost-pink: #ff69b4;
+  --ghost-cyan: #00ffff;
+  --ghost-orange: #ff8c00;
+  --pellet-color: #39ff14;
+  --power-pellet: #39ff14;
+  --wall-color: #1a3a1a;
+  --wall-border: #39ff14;
+  
+  /* Text */
+  --text-primary: #e0e0e8;
+  --text-secondary: #8a8a9a;
+  --text-muted: #555566;
+  
+  /* Fonts */
+  --font-arcade: 'Press Start 2P', monospace;
+  --font-cyber: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Glow effects */
+  --glow-sm: 0 0 6px var(--neon-green-glow);
+  --glow-md: 0 0 15px var(--neon-green-glow);
+  --glow-lg: 0 0 30px var(--neon-green-glow);
+  --glow-xl: 0 0 60px var(--neon-green-glow), 0 0 120px rgba(57, 255, 20, 0.15);
+}
+
+/* Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--ritual-black);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated background grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(57, 255, 20, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ritual-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-green-dim);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-green);
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--neon-green);
+  color: var(--ritual-black);
+}
+
+/* ── Utility Classes ── */
+.font-arcade {
+  font-family: var(--font-arcade);
+}
+
+.font-cyber {
+  font-family: var(--font-cyber);
+}
+
+.text-neon {
+  color: var(--neon-green);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px var(--neon-green-glow), 0 0 20px var(--neon-green-glow);
+}
+
+.border-glow {
+  border-color: var(--neon-green);
+  box-shadow: var(--glow-sm), inset 0 0 4px rgba(57, 255, 20, 0.05);
+}
+
+.neon-box {
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  background: var(--ritual-card);
+  box-shadow: var(--glow-sm);
+}
+
+/* ── Buttons ── */
+.btn-neon {
+  font-family: var(--font-cyber);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: 1px solid var(--neon-green);
+  background: transparent;
+  color: var(--neon-green);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+  background: rgba(57, 255, 20, 0.1);
+  box-shadow: var(--glow-md);
+  transform: translateY(-1px);
+}
+
+.btn-neon:active {
+  transform: translateY(1px);
+}
+
+.btn-neon-filled {
+  font-family: var(--font-cyber);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: none;
+  background: var(--neon-green);
+  color: var(--ritual-black);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--glow-md);
+}
+
+.btn-neon-filled:hover {
+  box-shadow: var(--glow-lg);
+  transform: translateY(-2px);
+}
+
+.btn-neon-filled:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Animations ── */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: var(--glow-sm); }
+  50% { box-shadow: var(--glow-lg); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes text-glitch {
+  0%, 100% { text-shadow: 0 0 10px var(--neon-green-glow); }
+  25% { text-shadow: -2px 0 var(--ghost-red), 2px 0 var(--ghost-cyan); }
+  50% { text-shadow: 0 0 20px var(--neon-green-glow); }
+  75% { text-shadow: 2px 0 var(--ghost-pink), -2px 0 var(--neon-green); }
+}
+
+@keyframes chomp {
+  0%, 100% { clip-path: polygon(100% 0%, 100% 100%, 50% 50%, 0% 100%, 0% 0%); }
+  50% { clip-path: polygon(100% 0%, 100% 100%, 50% 50%, 100% 100%, 100% 0%); }
+}
+
+@keyframes pellet-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.8); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+/* ── RainbowKit Overrides ── */
+[data-rk] button {
+  font-family: var(--font-cyber) !important;
+}
+
+/* ── Pac-Man Canvas ── */
+.pacman-canvas-container {
+  border: 2px solid rgba(57, 255, 20, 0.4);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    var(--glow-lg),
+    inset 0 0 40px rgba(0, 0, 0, 0.5);
+  background: #000;
+  position: relative;
+}
+
+.pacman-canvas-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(57, 255, 20, 0.01) 50%,
+    transparent 100%
+  );
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Card Components ── */
+.ritual-card {
+  background: var(--ritual-card);
+  border: 1px solid var(--ritual-border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ritual-card:hover {
+  border-color: rgba(57, 255, 20, 0.3);
+  box-shadow: var(--glow-sm);
+}
+
+/* ── Header ── */
+.ritual-header {
+  background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ritual-border);
+}
+
+/* ── Game HUD ── */
+.game-hud {
+  font-family: var(--font-arcade);
+  font-size: 10px;
+  color: var(--neon-green);
+  letter-spacing: 0.15em;
+}
+
+/* ── Maze walls neon glow ── */
+.maze-wall {
+  stroke: var(--neon-green);
+  stroke-width: 2;
+  fill: none;
+  filter: drop-shadow(0 0 3px var(--neon-green-glow));
+}
+
+/* ── Loading screen ── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--ritual-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-pacman {
+  width: 40px;
+  height: 40px;
+  background: var(--pacman-yellow);
+  border-radius: 50%;
+  animation: chomp 0.5s ease-in-out infinite;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .game-hud {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-dpad {
+    display: none !important;
+  }
+}
+
+/* ── Background Logo ── */
+@keyframes levitate {
+  0% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-20px); }
+  100% { transform: translate(-50%, -50%) translateY(0); }
+}
+
+.ritual-bg-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 1200px; /* Massive size to easily surround the game board */
+  height: auto;
+  opacity: 0.15;
+  filter: drop-shadow(0 0 20px var(--neon-green)) drop-shadow(0 0 40px var(--neon-green-dim)) brightness(0.6);
+  animation: levitate 5s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
