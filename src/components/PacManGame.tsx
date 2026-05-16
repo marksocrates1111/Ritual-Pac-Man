@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { CANVAS_W, CANVAS_H } from '../game/constants';
-import { createGame, updateGame, renderGame, handleKeyDown, type GameState } from '../game/engine';
+import { createGame, updateGame, renderGame, handleKeyDown, type GameState, drawOverlay } from '../game/engine';
 
 interface PacManGameProps {
   onScoreChange?: (score: number) => void;
@@ -149,6 +149,19 @@ export function PacManGame({ onScoreChange, onGameOver, onStateChange }: PacManG
     };
   }, [handleConfirm]);
 
+  const handleDpad = (key: string) => {
+    setActiveKey(key);
+    handleKeyDown(gameRef.current, key);
+  };
+
+  const getBtnStyle = (key: string) => ({
+    width: 64, height: 64, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
+    background: activeKey === key ? 'var(--neon-green)' : 'transparent',
+    color: activeKey === key ? 'var(--ritual-black)' : 'var(--neon-green)',
+    boxShadow: activeKey === key ? '0 0 15px var(--neon-green)' : 'none',
+    transition: 'all 0.1s ease',
+  });
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: '100%', maxWidth: CANVAS_W }}>
       {/* HUD */}
@@ -173,15 +186,15 @@ export function PacManGame({ onScoreChange, onGameOver, onStateChange }: PacManG
       </div>
 
       {/* Mobile D-pad — visible only on small screens */}
-      <div className="mobile-dpad" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 44px)', gridTemplateRows: 'repeat(3, 44px)', gap: 4, justifyContent: 'center' }}>
+      <div className="mobile-dpad" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 64px)', gridTemplateRows: 'repeat(3, 64px)', gap: 8, justifyContent: 'center', margin: '16px 0' }}>
         <div />
-        <button onClick={() => handleKeyDown(gameRef.current, 'ArrowUp')} className="btn-neon" style={{ width: 44, height: 44, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>▲</button>
+        <button onClick={() => handleDpad('ArrowUp')} className="btn-neon" style={getBtnStyle('ArrowUp')}>▲</button>
         <div />
-        <button onClick={() => handleKeyDown(gameRef.current, 'ArrowLeft')} className="btn-neon" style={{ width: 44, height: 44, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>◄</button>
-        <button onClick={handleConfirm} className="btn-neon-filled" style={{ width: 44, height: 44, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, borderRadius: '50%' }}>GO</button>
-        <button onClick={() => handleKeyDown(gameRef.current, 'ArrowRight')} className="btn-neon" style={{ width: 44, height: 44, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>►</button>
+        <button onClick={() => handleDpad('ArrowLeft')} className="btn-neon" style={getBtnStyle('ArrowLeft')}>◄</button>
+        <button onClick={handleConfirm} className="btn-neon-filled" style={{ width: 64, height: 64, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, borderRadius: '50%' }}>GO</button>
+        <button onClick={() => handleDpad('ArrowRight')} className="btn-neon" style={getBtnStyle('ArrowRight')}>►</button>
         <div />
-        <button onClick={() => handleKeyDown(gameRef.current, 'ArrowDown')} className="btn-neon" style={{ width: 44, height: 44, padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>▼</button>
+        <button onClick={() => handleDpad('ArrowDown')} className="btn-neon" style={getBtnStyle('ArrowDown')}>▼</button>
         <div />
       </div>
 
