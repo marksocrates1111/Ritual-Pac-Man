@@ -356,6 +356,9 @@ body::after {
   .game-hud {
     font-size: 8px;
   }
+  .desktop-only {
+    display: none !important;
+  }
 }
 
 @media (min-width: 769px) {

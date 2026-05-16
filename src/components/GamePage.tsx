@@ -73,7 +73,7 @@ export function GamePage() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             {isConnected && (
               <div className="game-hud" style={{ textAlign: 'right' }}>
                 <div>BAL: <span style={{ color: '#ffe100' }}>{balance}</span> RITUAL</div>
