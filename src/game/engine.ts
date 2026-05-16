@@ -2,7 +2,7 @@ import { TILE_SIZE, COLS, ROWS, MAZE, COLORS, DIR } from './constants';
 import { playWaka, playPowerPellet, playEatGhost, playDeath, playLevelClear, startSiren, stopSiren, setFrightenedSiren, playGameStart } from './audio';
 
 const ritualLogo = new Image();
-ritualLogo.src = '/ritgreen-logo.png';
+ritualLogo.src = '/ritgreen.png';
 
 export type Direction = { x: number; y: number };
 export type GameState = 'waiting' | 'starting' | 'playing' | 'dying' | 'gameover' | 'won' | 'levelclear';
@@ -431,12 +431,18 @@ export function renderGame(ctx: CanvasRenderingContext2D, game: GameData): void 
         ctx.globalAlpha = pulse;
         const size = 12; // Made smaller as requested
         if (ritualLogo.complete && ritualLogo.naturalWidth > 0) {
+          ctx.shadowColor = '#39ff14';
+          ctx.shadowBlur = 15;
           ctx.drawImage(ritualLogo, x * T + (T - size) / 2, y * T + (T - size) / 2, size, size);
+          ctx.shadowBlur = 0;
         } else {
           ctx.fillStyle = COLORS.powerPellet;
+          ctx.shadowColor = '#39ff14';
+          ctx.shadowBlur = 15;
           ctx.beginPath();
           ctx.arc(x * T + T / 2, y * T + T / 2, 6, 0, Math.PI * 2);
           ctx.fill();
+          ctx.shadowBlur = 0;
         }
         ctx.globalAlpha = 1;
       } else if (cell === 5) {
