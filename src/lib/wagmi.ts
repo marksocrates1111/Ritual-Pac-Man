@@ -1,5 +1,6 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { http, type Chain } from 'wagmi';
+import { http } from 'wagmi';
+import { type Chain } from 'viem';
 
 // Ritual Chain (Chain ID 1979)
 export const ritualChain: Chain = {

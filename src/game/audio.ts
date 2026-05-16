@@ -30,8 +30,6 @@ function playTone(freq: number, type: OscillatorType, duration: number, vol = 0.
 }
 
 // Global state for continuous sounds
-let wakaOsc: OscillatorNode | null = null;
-let wakaGain: GainNode | null = null;
 let sirenOsc: OscillatorNode | null = null;
 let sirenGain: GainNode | null = null;
 let isFrightened = false;
@@ -39,7 +37,6 @@ let isFrightened = false;
 // Waka Waka (eating dots) - slightly synthesized alternating notes
 let wakaState = 0;
 export function playWaka() {
-  const ctx = getContext();
   const freq = wakaState % 2 === 0 ? 300 : 450;
   wakaState++;
   playTone(freq, 'triangle', 0.1, 0.05);
