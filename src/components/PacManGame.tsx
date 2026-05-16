@@ -150,7 +150,7 @@ export function PacManGame({ onScoreChange, onGameOver, onStateChange }: PacManG
   }, [handleConfirm]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, width: '100%', maxWidth: CANVAS_W }}>
       {/* HUD */}
       <div className="game-hud" style={{ width: '100%', maxWidth: CANVAS_W, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 4px' }}>
         <span>SCORE <span style={{ color: '#ffe100' }}>{score.toString().padStart(6, '0')}</span></span>
@@ -163,12 +163,12 @@ export function PacManGame({ onScoreChange, onGameOver, onStateChange }: PacManG
       </div>
 
       {/* Canvas */}
-      <div className="pacman-canvas-container" style={{ width: CANVAS_W, height: CANVAS_H }}>
+      <div className="pacman-canvas-container" style={{ width: '100%', maxWidth: CANVAS_W, margin: '0 auto', display: 'flex', justifyContent: 'center' }}>
         <canvas
           ref={canvasRef}
           width={CANVAS_W}
           height={CANVAS_H}
-          style={{ display: 'block', imageRendering: 'pixelated' }}
+          style={{ display: 'block', width: '100%', height: 'auto', imageRendering: 'pixelated', borderRadius: '4px' }}
         />
       </div>
 
@@ -186,11 +186,11 @@ export function PacManGame({ onScoreChange, onGameOver, onStateChange }: PacManG
       </div>
 
       {/* Status */}
-      <p className="font-arcade" style={{ color: 'var(--text-secondary)', fontSize: 8, textAlign: 'center' }}>
-        {gameState === 'waiting' && '⌨ WASD / ARROWS · SPACE TO START'}
+      <p className="font-arcade" style={{ color: 'var(--text-secondary)', fontSize: 8, textAlign: 'center', marginTop: 8 }}>
+        {gameState === 'waiting' && '⌨ WASD / ARROWS · SPACE / GO TO START'}
         {gameState === 'playing' && 'EAT ALL PELLETS · AVOID GHOSTS'}
-        {gameState === 'gameover' && 'PRESS SPACE TO RESTART'}
-        {gameState === 'levelclear' && 'PRESS SPACE FOR NEXT LEVEL'}
+        {gameState === 'gameover' && 'SPACE / GO TO RESTART'}
+        {gameState === 'levelclear' && 'SPACE / GO FOR NEXT LEVEL'}
       </p>
     </div>
   );

@@ -86,9 +86,9 @@ export function GamePage() {
       </header>
 
       {/* Main content */}
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '24px 16px', gap: 24 }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 8px', gap: 12, width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
         {/* Game */}
-        <div className="animate-fade-in">
+        <div className="animate-fade-in" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
           <PacManGame
             onScoreChange={() => {}}
             onGameOver={handleGameOver}
